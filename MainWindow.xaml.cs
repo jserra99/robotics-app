@@ -229,6 +229,10 @@ namespace robotics_app
                 double y = selectedPoint.y / 2;
                 double newX = x + centerX;
                 double newY = -y + centerY;
+                if (i == controlPoints.Count - 1)
+                {
+                    selectedPoint.stop = true;
+                }
                 SolidColorBrush pointColor;
                 if (selectedPoint.selected)
                 {
@@ -562,7 +566,8 @@ namespace robotics_app
         {
             if (loaded)
             {
-                controlPoints.Add(new ControlPoint(0.0, 0.0, 0.0, 50.0, 0.0, 1.0, false, new List<string>()));
+                controlPoints.Add(new ControlPoint(0.0, 0.0, 0.0, 50.0, 0.0, 1.0, true, new List<string>()));
+                controlPoints[controlPoints.Count - 2].stop = false;
                 Refresh();
             }
         }
@@ -605,16 +610,26 @@ namespace robotics_app
                     MoveButton.Background = System.Windows.Media.Brushes.Green;
                     MoveButtonText.Text = "Moving";
                 }
+                if (controlPoints[selectedPointIndex].stop)
+                {
+                    StopButton.Background = System.Windows.Media.Brushes.Red;
+                }
+                else
+                {
+                    StopButton.Background = System.Windows.Media.Brushes.Gray;
+                }
             }
             else
             {
                 ThetaSlider.Value = 0;
                 DValSlider.Value = 50;
+                SpeedSlider.Value = 1;
                 xCoordinateBox.Text = "";
                 yCoordinateBox.Text = "";
                 PointIndexField.Text = "";
                 MoveButton.Background = System.Windows.Media.Brushes.Red;
                 MoveButtonText.Text = "Move";
+                StopButton.Background = System.Windows.Media.Brushes.Gray;
             }
         }
 
@@ -818,6 +833,31 @@ namespace robotics_app
                 string exportJSON = JsonConvert.SerializeObject(new Settings(robotWidth, robotLength));
                 File.WriteAllText($"{cwd}\\CreatorSettings.json", exportJSON);
             }
+        }
+
+        private void StopButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (loaded)
+            {
+                if (selectedPointIndex != -1)
+                {
+                    controlPoints[selectedPointIndex].stop = !controlPoints[selectedPointIndex].stop;
+                    if (controlPoints[selectedPointIndex].stop)
+                    {
+                        StopButton.Background = System.Windows.Media.Brushes.Red;
+                    }
+                    else
+                    {
+                        StopButton.Background = System.Windows.Media.Brushes.Gray;
+                    }
+                    Refresh();
+                }
+            }
+        }
+
+        private void SpeedSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+
         }
     }
 

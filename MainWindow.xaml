@@ -187,6 +187,7 @@
                                         <TextBlock Text="Point Index: " FontWeight="Bold" Foreground="White" />
                                         <TextBox Grid.Column="1" Background="#2B2B2B" Foreground="White" x:Name="PointIndexField" TextChanged="PointIndexField_TextChanged"/>
                                     </Grid>
+                                    
                                     <Border Padding="0 5 0 5">
                                         <Grid>
                                             <Grid.ColumnDefinitions>
@@ -241,6 +242,30 @@
                                             <TextBlock Text="Heading: " Foreground="White" FontWeight="Bold"/>
                                             <TextBlock Text="{Binding ElementName=HeadingSlider, Path=Value}" FontWeight="DemiBold"  Foreground="White" Grid.Column="1"/>
                                             <Slider x:Name="HeadingSlider" Value="0" Minimum="-3.14" Maximum="3.14" Grid.Column="2" ValueChanged="HeadingSlider_ValueChanged"/>
+                                        </Grid>
+                                    </Border>
+                                    <Border Padding="0 5 0 5">
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="55"/>
+                                                <ColumnDefinition Width="40"/>
+                                                <ColumnDefinition Width="*" />
+                                            </Grid.ColumnDefinitions>
+                                            <TextBlock Text="Speed: " Foreground="White" FontWeight="Bold"/>
+                                            <TextBlock Text="{Binding ElementName=SpeedSlider, Path=Value}" FontWeight="DemiBold"  Foreground="White" Grid.Column="1"/>
+                                            <Slider x:Name="SpeedSlider" Value="1" Minimum="0" Maximum="1" Grid.Column="2" ValueChanged="SpeedSlider_ValueChanged"/>
+                                        </Grid>
+                                    </Border>
+                                    <Border Padding="0 5 0 5">
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="auto"/>
+                                                <ColumnDefinition Width="50"/>
+                                            </Grid.ColumnDefinitions>
+                                            <TextBlock Text="Stop at Point?: " Foreground="White" FontWeight="SemiBold"/>
+                                            <Button x:Name="StopButton" Grid.Column="5" Padding="5 0 5 0" Background="Gray" Click="StopButton_Click">
+                                                <TextBlock x:Name="StopButtonText" Foreground="White" Text="Stop"/>
+                                            </Button>
                                         </Grid>
                                     </Border>
                                 </StackPanel>
