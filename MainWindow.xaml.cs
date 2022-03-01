@@ -819,6 +819,7 @@ namespace robotics_app
         {
             if (Double.TryParse(RobotWidth.Text, out double n))
             {
+                Trace.WriteLine(robotWidth.ToString());
                 robotWidth = n;
                 string exportJSON = JsonConvert.SerializeObject(new Settings(robotWidth, robotLength));
                 File.WriteAllText($"{cwd}\\CreatorSettings.json", exportJSON);
@@ -829,7 +830,7 @@ namespace robotics_app
         {
             if (Double.TryParse(RobotLength.Text, out double n))
             {
-                robotLength = n;
+                robotLength = n ;
                 string exportJSON = JsonConvert.SerializeObject(new Settings(robotWidth, robotLength));
                 File.WriteAllText($"{cwd}\\CreatorSettings.json", exportJSON);
             }

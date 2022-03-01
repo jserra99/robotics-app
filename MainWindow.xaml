@@ -158,7 +158,7 @@
                                             <ColumnDefinition Width="auto"/>
                                             <ColumnDefinition Width="50"/>
                                         </Grid.ColumnDefinitions>
-                                        <TextBlock Text="Frame Dimension W/L:" Foreground="White" Grid.Column="0" Padding="0 0 5 0"/>
+                                        <TextBlock Text="Frame Dimension (cm) W/L:" Foreground="White" Grid.Column="0" Padding="0 0 5 0"/>
                                         <TextBox Grid.Column="1" Background="#2B2B2B" x:Name="RobotWidth" Foreground="White" TextChanged="RobotWidth_TextChanged"/>
                                         <TextBlock Text="x" Foreground="White" Grid.Column="2" Padding="5 0 5 0"/>
                                         <TextBox Grid.Column="3" Background="#2B2B2B" x:Name="RobotLength" Foreground="White" TextChanged="RobotLength_TextChanged"/>
