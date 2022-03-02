@@ -34,7 +34,6 @@ namespace robotics_app
         private string filePath;
         private string folderPath;
         private int selectedPointIndex = -1;
-        private double lineDensityFactor = 0.5; // affects how densely packed the lines are but does not affect the actual scaling
         private List<pathPoint> pathPoints = new List<pathPoint>();
         private List<ControlPoint> controlPoints = new List<ControlPoint>();
         private Planner planner;
@@ -385,7 +384,10 @@ namespace robotics_app
 
         private void Save_Click(object sender, RoutedEventArgs e)
         {
-            Export();
+            if (loaded)
+            {
+                Export();
+            }
         }
 
         private void Open_Click(object sender, RoutedEventArgs e)
@@ -605,6 +607,7 @@ namespace robotics_app
                 xCoordinateBox.Text = Math.Round((controlPoints[selectedPointIndex].x * unitCoefficient), 2).ToString();
                 yCoordinateBox.Text = Math.Round((controlPoints[selectedPointIndex].y * unitCoefficient), 2).ToString();
                 PointIndexField.Text = selectedPointIndex.ToString();
+                HeadingSlider.Value = controlPoints[selectedPointIndex].heading;
                 if (moving)
                 {
                     MoveButton.Background = System.Windows.Media.Brushes.Green;
@@ -857,6 +860,21 @@ namespace robotics_app
         }
 
         private void SpeedSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+
+        }
+
+        private void ActionsTextBox_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
+        {
+
+        }
+
+        private void AddButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void RemoveActionButton_Click(object sender, RoutedEventArgs e)
         {
 
         }
