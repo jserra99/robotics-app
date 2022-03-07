@@ -614,6 +614,7 @@ namespace robotics_app
                 yCoordinateBox.Text = Math.Round((controlPoints[selectedPointIndex].y * unitCoefficient), 2).ToString();
                 PointIndexField.Text = selectedPointIndex.ToString();
                 HeadingSlider.Value = controlPoints[selectedPointIndex].heading;
+                SpeedSlider.Value = controlPoints[selectedPointIndex].speed;
                 if (moving)
                 {
                     MoveButton.Background = System.Windows.Media.Brushes.Green;
