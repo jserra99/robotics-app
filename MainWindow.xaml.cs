@@ -536,7 +536,10 @@ namespace robotics_app
         {
             if (loaded)
             {
-                controlPoints.Insert(selectedPointIndex + 1, new ControlPoint(0.0, 0.0, 0.0, 50.0, 0.0, 1.0, false, new List<string>()));
+                controlPoints.Insert(selectedPointIndex + 1, new ControlPoint(0.0, 0.0, 0.0, 50.0, 0.0, 1.0, false, new List<string>()
+                {
+                    "0.0"
+                }));
                 Refresh();
             }
         }
@@ -568,7 +571,10 @@ namespace robotics_app
         {
             if (loaded)
             {
-                controlPoints.Add(new ControlPoint(0.0, 0.0, 0.0, 50.0, 0.0, 1.0, true, new List<string>()));
+                controlPoints.Add(new ControlPoint(0.0, 0.0, 0.0, 50.0, 0.0, 1.0, true, new List<string>()
+                {
+                    "0.0"
+                }));
                 controlPoints[controlPoints.Count - 2].stop = false;
                 Refresh();
             }
@@ -621,18 +627,33 @@ namespace robotics_app
                 {
                     StopButton.Background = System.Windows.Media.Brushes.Gray;
                 }
+                ActionListBox.Items.Clear();
+                ActionsTextBox.Clear();
+                int l = 0;
+                foreach (string action in controlPoints[selectedPointIndex].actions)
+                {
+                    if (l != 0)
+                    {
+                        ActionListBox.Items.Add(action);
+                    }
+                    l++;
+                }
+                WaitField.Text = controlPoints[selectedPointIndex].actions[0];
             }
             else
             {
                 ThetaSlider.Value = 0;
                 DValSlider.Value = 50;
                 SpeedSlider.Value = 1;
-                xCoordinateBox.Text = "";
-                yCoordinateBox.Text = "";
-                PointIndexField.Text = "";
+                xCoordinateBox.Clear();
+                yCoordinateBox.Clear();
+                PointIndexField.Clear();
                 MoveButton.Background = System.Windows.Media.Brushes.Red;
                 MoveButtonText.Text = "Move";
                 StopButton.Background = System.Windows.Media.Brushes.Gray;
+                ActionListBox.Items.Clear();
+                ActionsTextBox.Clear();
+                WaitField.Text = "0.0";
             }
         }
 
@@ -861,22 +882,42 @@ namespace robotics_app
 
         private void SpeedSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-
-        }
-
-        private void ActionsTextBox_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
-        {
-
+            if (loaded && selectedPointIndex != -1)
+            {
+                controlPoints[selectedPointIndex].speed = SpeedSlider.Value;
+                RefreshUI();
+            }
         }
 
         private void AddButton_Click(object sender, RoutedEventArgs e)
         {
-
+            if (loaded && selectedPointIndex != -1 && ActionsTextBox.Text != "")
+            {
+                controlPoints[selectedPointIndex].actions.Add(ActionsTextBox.Text);
+                RefreshUI();
+            }
         }
 
         private void RemoveActionButton_Click(object sender, RoutedEventArgs e)
         {
+            if (loaded && selectedPointIndex != -1) 
+            {
+                if (ActionListBox.SelectedIndex != -1)
+                {
+                    ActionListBox.Items.Remove(ActionListBox.SelectedIndex);
+                    controlPoints[selectedPointIndex].actions.RemoveAt(ActionListBox.SelectedIndex + 1);
+                    RefreshUI();
+                }
+            }
+        }
 
+        private void WaitField_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
+        {
+            if (loaded && selectedPointIndex != -1)
+            {
+                controlPoints[selectedPointIndex].actions[0] = WaitField.Text;
+                RefreshUI();
+            }
         }
     }
 

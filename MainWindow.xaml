@@ -277,7 +277,7 @@
                                                 <ColumnDefinition Width="50"/>
                                             </Grid.ColumnDefinitions>
                                             <TextBlock Text="Point Actions:" Foreground="White" FontWeight="SemiBold"/>
-                                            <TextBox x:Name="ActionsTextBox" Foreground="White" Background="#2B2B2B" Grid.Column="1" TextChanged="ActionsTextBox_TextChanged"/>
+                                            <TextBox x:Name="ActionsTextBox" Foreground="White" Background="#2B2B2B" Grid.Column="1"/>
                                             <Button Background="#2B2B2B" x:Name="AddButton" Click="AddButton_Click" Grid.Column="2">
                                                 <TextBlock Text="Add" Foreground="White" FontWeight="SemiBold"/>
                                             </Button>
@@ -286,8 +286,15 @@
                                             </Button>
                                         </Grid>
                                     </Border>
-                                    <ListBox>
-                                    </ListBox>
+                                    <ComboBox x:Name="ActionListBox"></ComboBox>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="auto"/>
+                                            <ColumnDefinition Width="50"/>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Text="Time to Wait: " FontWeight="Bold" Foreground="White" />
+                                        <TextBox Grid.Column="1" Background="#2B2B2B" Foreground="White" x:Name="WaitField" TextChanged="WaitField_TextChanged"/>
+                                    </Grid>
                                 </StackPanel>
                             </Grid>
                         </Border>
