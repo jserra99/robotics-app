@@ -345,7 +345,10 @@ namespace robotics_app
             if (!newSelected & !loaded & savePathTextBox.Text != "" & PlanNameTextBox.Text != "")
             {
                 newSelected = false;
-                controlPoints.Add(new ControlPoint(0.0, 0.0, 0.0, 50.0, 0.0, 1.0, false, new List<string>()));
+                controlPoints.Add(new ControlPoint(0.0, 0.0, 0.0, 50.0, 0.0, 1.0, false, new List<string>()
+                {
+                    "0.0"
+                }));
                 planner = new Planner(controlPoints);
                 Refresh();
             }
@@ -369,7 +372,10 @@ namespace robotics_app
                 if (savePathTextBox.Text != "" & PlanNameTextBox.Text != "")
                 {
                     newSelected = false;
-                    controlPoints.Add(new ControlPoint(0.0, 0.0, 0.0, 50.0, 0.0, 1.0, false, new List<string>()));
+                    controlPoints.Add(new ControlPoint(0.0, 0.0, 0.0, 50.0, 0.0, 1.0, false, new List<string>()
+                    {
+                        "0.0"
+                    }));
                     planner = new Planner(controlPoints);
                     Refresh();
                 }
